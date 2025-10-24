@@ -1,0 +1,77 @@
+﻿<Window x:Class="Monthly_Claim_System.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Monthly_Claim_System"
+        mc:Ignorable="d"
+        Title="Contract Monthly Claim System - Lecturer Dashboard" Height="600" Width="900"
+        WindowStartupLocation="CenterScreen" Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Background="#FF800080" Padding="15">
+            <TextBlock Text="Lecturer Dashboard" Foreground="White" FontSize="24" FontWeight="Bold"/>
+        </Border>
+
+        <!-- Main Content -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <!-- Left Panel: Submit New Claim -->
+            <Border BorderBrush="LightGray" BorderThickness="1" Margin="10" Padding="15" Width="400">
+                <StackPanel>
+
+                    <!-- Added Lecturer Info -->
+                    <TextBlock Text="Logged in as: LEC001" 
+                               FontSize="14" 
+                               FontWeight="Bold" 
+                               Foreground="#FF800080"
+                               Margin="0,0,0,10"/>
+
+                    <TextBlock Text="Submit New Claim" FontSize="18" FontWeight="Bold" Foreground="#FF800080" Margin="0,0,0,15"/>
+
+                    <TextBlock Text="Hours Worked:" Foreground="#FF800080" FontWeight="SemiBold"/>
+                    <TextBox x:Name="txtHours" Margin="0,5,0,10" Padding="5"/>
+
+                    <TextBlock Text="Hourly Rate (ZAR):" Foreground="#FF800080" FontWeight="SemiBold"/>
+                    <TextBox x:Name="txtRate" Margin="0,5,0,10" Padding="5"/>
+
+                    <TextBlock Text="Additional Notes:" Foreground="#FF800080" FontWeight="SemiBold"/>
+                    <TextBox x:Name="txtNotes" Margin="0,5,0,10" Height="60" Padding="5" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+
+                    <TextBlock Text="Upload Supporting Document:" Foreground="#FF800080" FontWeight="SemiBold"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
+                        <Button x:Name="btnBrowse" Content="Browse..." Click="BtnBrowse_Click" Background="#FF800080" Foreground="White" Padding="10,5"/>
+                        <TextBlock x:Name="txtFileName" Text="No file chosen" Margin="10,0,0,0" VerticalAlignment="Center" FontStyle="Italic"/>
+                    </StackPanel>
+
+                    <Button x:Name="btnSubmit" Content="SUBMIT CLAIM" Click="BtnSubmit_Click" Background="#FF800080" Foreground="White" FontSize="16" FontWeight="Bold" Padding="20,10" Margin="0,20,0,0" Cursor="Hand"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Right Panel: My Claims -->
+            <Border BorderBrush="LightGray" BorderThickness="1" Margin="10" Padding="15">
+                <StackPanel>
+                    <TextBlock Text="My Claims" FontSize="18" FontWeight="Bold" Foreground="#FF800080" Margin="0,0,0,15"/>
+                    <ListView x:Name="lstClaims" Width="400" Height="350">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Date}" Width="80"/>
+                                <GridViewColumn Header="Hours" DisplayMemberBinding="{Binding Hours}" Width="60"/>
+                                <GridViewColumn Header="Total" DisplayMemberBinding="{Binding Total, StringFormat='R {0:F2}'}" Width="80"/>
+                                <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="100"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                    <!-- Test button to open approval window -->
+                    <Button Content="Open Approval View (Test)" Click="OpenApprovalView_Click" 
+                            Margin="0,10,0,0" Background="#FFD580" Padding="10,5" FontWeight="Bold"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Grid>
+</Window>
